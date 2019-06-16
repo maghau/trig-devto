@@ -8,20 +8,35 @@ import BlogCard from '../components/BlogCard'
 // // Now the registry is available via the CMS object.
 // CMS.registerPreviewTemplate('my-template', MyTemplate)
 
+const NetlifyIdentity = () => {
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', user => {
+      if (!user) {
+        window.netlifyIdentity.on('login', () => {
+          document.location.href = '/admin/'
+        })
+      }
+    })
+  }
+}
+
 const IndexPage = ({ data }) => (
-  <Layout>
-    {data.allDevArticles.edges.map((node, key) => (
-      <BlogCard
-        key={key}
-        post={{
-          ...node.node.article,
-          tag_list_array: node.node.article.tag_list
-            .split(',')
-            .map(tag => tag.trim()),
-        }}
-      />
-    ))}
-  </Layout>
+  <>
+    <NetlifyIdentity />
+    <Layout>
+      {data.allDevArticles.edges.map((node, key) => (
+        <BlogCard
+          key={key}
+          post={{
+            ...node.node.article,
+            tag_list_array: node.node.article.tag_list
+              .split(',')
+              .map(tag => tag.trim()),
+          }}
+        />
+      ))}
+    </Layout>
+  </>
 )
 
 export default IndexPage
