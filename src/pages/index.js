@@ -3,6 +3,10 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogCard from '../components/BlogCard'
+import CMS from 'netlify-cms'
+
+// Now the registry is available via the CMS object.
+CMS.registerPreviewTemplate('my-template', MyTemplate)
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -11,7 +15,9 @@ const IndexPage = ({ data }) => (
         key={key}
         post={{
           ...node.node.article,
-          tag_list_array: node.node.article.tag_list.split(',').map(tag => tag.trim()),
+          tag_list_array: node.node.article.tag_list
+            .split(',')
+            .map(tag => tag.trim()),
         }}
       />
     ))}
