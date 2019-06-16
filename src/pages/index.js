@@ -1,28 +1,11 @@
 import React from 'react'
-
+import netlifyIdentity from 'netlify-identity-widget'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogCard from '../components/BlogCard'
-// import CMS from 'netlify-cms'
-
-// // Now the registry is available via the CMS object.
-// CMS.registerPreviewTemplate('my-template', MyTemplate)
-
-const NetlifyIdentity = () => {
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on('init', user => {
-      if (!user) {
-        window.netlifyIdentity.on('login', () => {
-          document.location.href = '/admin/'
-        })
-      }
-    })
-  }
-}
 
 const IndexPage = ({ data }) => (
   <>
-    <NetlifyIdentity />
     <Layout>
       {data.allDevArticles.edges.map((node, key) => (
         <BlogCard
