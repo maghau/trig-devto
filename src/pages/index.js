@@ -3,10 +3,10 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogCard from '../components/BlogCard'
-import CMS from 'netlify-cms'
+// import CMS from 'netlify-cms'
 
-// Now the registry is available via the CMS object.
-CMS.registerPreviewTemplate('my-template', MyTemplate)
+// // Now the registry is available via the CMS object.
+// CMS.registerPreviewTemplate('my-template', MyTemplate)
 
 const IndexPage = ({ data }) => (
   <Layout>
